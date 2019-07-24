@@ -1,0 +1,58 @@
+<!-- Extends default Bootstrap Unical Italia template -->
+{% extends 'base-setup.html' %}
+
+{% load i18n %}
+{% load static %}
+
+{% block page_title %}
+{% trans "Informations" %}
+{% endblock page_title %}
+
+{% block centered_container %}
+<h3 class="mb-4">{% trans "Informations" %}</h3>
+
+{% if categories %}
+    {% for category in categories %}
+        {% with category.has_active_conditions as active_conditions %}
+        {% if active_conditions %}
+        <div class="card-wrapper card-space">
+            <div class="card card-bg no-after">
+                <div class="card-body">
+                    <h4 class="card-title">{{ category.name }}</h4>
+                    {% if category.img_url %}
+                    <p>
+                        <img style="max-width: 100%;"
+                             src="{{ category.img_url.url }}"
+                             title="{{ category.name }}"
+                             alt="{{ category.name }}">
+                    </p>
+                    {% endif %}
+                    {% if category.description %}
+                        <p>{{ category.description|safe }}</p>
+                        <hr />
+                    {% endif %}
+                    <div class="row">
+                        <div class="col-sm">
+                            <ul>
+                            {% for condition in active_conditions %}
+                                {% if forloop.first %}
+                                <li>
+                                {% else %}
+                                <li class="mt-2">
+                                {% endif %}
+                                    <b>{{ condition.name }}</b>
+                                    <br>
+                                    {{ condition.description|safe }}
+                                </li>
+                            {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% endwith %}
+    {% endfor %}
+{% endif %}
+{% endblock centered_container %}

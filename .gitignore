@@ -1,0 +1,7 @@
+*.pyc
+*~
+*__pycache__*
+__pycache__/
+*/.~lock*
+tmp/*
+!tmp/README.md
