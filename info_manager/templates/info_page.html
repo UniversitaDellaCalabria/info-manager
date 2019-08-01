@@ -1,0 +1,48 @@
+<!-- Extends default Bootstrap Unical Italia template -->
+{% extends 'base-setup.html' %}
+
+{% load i18n %}
+{% load static %}
+
+{% block page_title %}
+{% trans "Informations" %}
+{% endblock page_title %}
+
+{% block header_center_search %}{% endblock header_center_search %}
+{% block header_slim_right_zone %}{% endblock header_slim_right_zone %}
+{% block main_menu %}{% endblock main_menu %}
+
+{% block centered_container %}
+<h3 class="mb-4">{{ category.name }}</h3>
+    <div class="card-wrapper card-space">
+        <div class="card card-bg no-after">
+            <div class="card-body">
+                {% if category.img_url %}
+                <p>
+                    <img style="max-width: 100%;"
+                         src="{{ category.img_url.url }}"
+                         title="{{ category.name }}"
+                         alt="{{ category.name }}">
+                </p>
+                {% endif %}
+                {% if category.description %}
+                    <p>{{ category.description|safe }}</p>
+                    <hr />
+                {% endif %}
+                <div class="row">
+                    <div class="col-sm">
+                        <ul class="list-group list-group-flush" style="padding-left: 0;">
+                        {% for item in category.active_pages %}
+                            <li class="mt-2 list-group-item">
+                                <h5>{{ item.name }}</h5>
+                                <br>
+                                <p>{{ item.description|safe }}</p>
+                            </li>
+                        {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock centered_container %}

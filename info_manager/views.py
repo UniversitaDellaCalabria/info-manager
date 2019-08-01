@@ -1,12 +1,13 @@
 from django.conf import settings
 from django.shortcuts import render
 from django.utils import translation
+from django.shortcuts import get_object_or_404
 
 from . models import *
 
-def info_manager_index(request):
-    language = request.session.get('language') or settings.LANGUAGE_CODE
 
+def _set_lang(request):
+    language = request.session.get('language') or settings.LANGUAGE_CODE
     if request.method == 'GET' and 'lang' in request.GET:
         for k,v in settings.LANGUAGES:
             if k == request.GET['lang']:
@@ -17,7 +18,19 @@ def info_manager_index(request):
     if translation.get_language() != language:
         translation.activate(language)
 
+
+def info_manager_index(request):
+    _set_lang(request)
     template = "info_manager_index.html"
-    categories = Category.objects.filter(is_active='True')
-    d = {'categories': categories}
+    categories = Category.objects.filter(is_active=1)
+    d = {'categories': categories,}
+    return render(request, template, d)
+
+
+def info_page(request, slug):
+    _set_lang(request)
+
+    template = "info_page.html"
+    category = get_object_or_404(Category, slug=slug)
+    d = {'category': category}
     return render(request, template, d)

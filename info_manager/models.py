@@ -29,9 +29,9 @@ class Category(models.Model):
         self.slug = slugify(self.name)
         super(Category, self).save(*args, **kwargs)
 
-    def has_active_conditions(self):
+    def active_pages(self):
         active_conditions = Item.objects.filter(category=self,
-                                                              is_active=True)
+                                                is_active=True)
         return active_conditions
 
     def __str__(self):

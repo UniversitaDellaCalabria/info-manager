@@ -8,13 +8,17 @@
 {% trans "Informations" %}
 {% endblock page_title %}
 
+
+{% block header_center_search %}{% endblock header_center_search %}
+{% block header_slim_right_zone %}{% endblock header_slim_right_zone %}
+{% block main_menu %}{% endblock main_menu %}
+
 {% block centered_container %}
-<h3 class="mb-4">{% trans "Informations" %}</h3>
+<h3 class="mb-4">{% trans "Information Pages" %}</h3>
 
 {% if categories %}
     {% for category in categories %}
-        {% with category.has_active_conditions as active_conditions %}
-        {% if active_conditions %}
+        {% if category.is_active %}
         <div class="card-wrapper card-space">
             <div class="card card-bg no-after">
                 <div class="card-body">
@@ -29,30 +33,14 @@
                     {% endif %}
                     {% if category.description %}
                         <p>{{ category.description|safe }}</p>
+                        <a href="{% url 'info_manager:info_page' category.slug %}" class="float-xl-right">{% trans "Leggi" %}</a>
                         <hr />
                     {% endif %}
-                    <div class="row">
-                        <div class="col-sm">
-                            <ul>
-                            {% for condition in active_conditions %}
-                                {% if forloop.first %}
-                                <li>
-                                {% else %}
-                                <li class="mt-2">
-                                {% endif %}
-                                    <b>{{ condition.name }}</b>
-                                    <br>
-                                    {{ condition.description|safe }}
-                                </li>
-                            {% endfor %}
-                            </ul>
-                        </div>
-                    </div>
+
                 </div>
             </div>
         </div>
         {% endif %}
-        {% endwith %}
     {% endfor %}
 {% endif %}
 {% endblock centered_container %}
