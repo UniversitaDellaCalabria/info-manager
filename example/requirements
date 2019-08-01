@@ -1,0 +1,4 @@
+...
+
+# Django CKEditor
+pip install django-ckeditor
