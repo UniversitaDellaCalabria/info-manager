@@ -35,6 +35,9 @@ class Category(models.Model):
     def active_items(self):
         return Item.objects.filter(category=self, is_active=True)
 
+    def active_translations(self):
+        return CategoryTranslation.objects.filter(category=self, is_active=True)
+
     def translate_as(self, lang):
         """
         returns translation if available
@@ -62,6 +65,10 @@ class CategoryTranslation(models.Model):
     @property
     def slug(self):
         return self.category.slug
+
+    def active_items(self):
+        return [item.translate_as(self.lang) for item in
+                Item.objects.filter(category=self.category, is_active=True)]
 
     class Meta:
         ordering = ['lang']
@@ -123,6 +130,8 @@ class ItemTranslation(models.Model):
     description = RichTextField(default='', blank=True, null=True)
     is_active = models.BooleanField(default=True,
                                     help_text=_('If active, is visible'))
+    created = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now=True)
 
     class Meta:
         ordering = ['lang']

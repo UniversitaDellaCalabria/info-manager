@@ -18,7 +18,7 @@ University of Calabria - SSO services
 {% block main_menu %}{% endblock main_menu %}
 
 {% block centered_container %}
-<h3 class="mb-4">{% trans "Information Pages" %}</h3>
+<h3 class="mb-4">{% trans "Informational Pages" %}</h3>
 
 {% if categories %}
     {% for category in categories %}
@@ -27,7 +27,7 @@ University of Calabria - SSO services
             <div class="card card-bg no-after">
                 <div class="card-body">
                     <h4 class="card-title">
-                        <a href="{% url 'info_manager:info_page' category.slug %}" style="color: grey; text-decoration: none;">
+                        <a href="{% url 'info_manager:info_page' category.slug %}" style="color: #383838; text-decoration: none;">
                         {{ category.name }}
                         </a>
                     </h4>
@@ -49,16 +49,20 @@ University of Calabria - SSO services
                     <ol>
                         {% for item in category.active_items %}
                         <li>
-                            <h6>
+                            <h6 style="color: #383838;">
                             {{ item.name }}
-                            {% if item.active_translations %}
+                            </h6>
+
+                            <p style="margin-bottom: 10px;">
+                                {% if item.active_translations %}
+                                {% trans "also available in the following languages" %}:
                                 {% for item_trans in item.active_translations %}
                                     &nbsp;[{{ item_trans.lang }}]
                                 {% endfor %}
                             {% endif %}
-                            </h6>
+                            </p>
 
-                            <p>{% trans "published" %}: {{ item.created }} &nbsp; {% trans "modified" %}: {{ item.modified }}</p>
+                            <p><small>{% trans "published" %}: {{ item.created }} &nbsp; {% trans "modified" %}: {{ item.modified }}</small></p>
                         </li>
                         {% endfor %}
                     </ol>

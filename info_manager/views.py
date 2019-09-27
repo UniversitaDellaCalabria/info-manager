@@ -20,7 +20,7 @@ def info_page(request, slug):
     lang = request.GET.get('lang',
                            translation.get_language_from_request(request))
     category = get_object_or_404(Category, slug=slug)
-    data = {'category': category,
+    data = {'category': category.translate_as(lang=lang),
             'active_items': [item.translate_as(lang=lang)
                              for item in category.active_items()]}
     return render(request, "info_page.html", data)
