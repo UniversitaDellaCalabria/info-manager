@@ -5,8 +5,10 @@ from django.utils.translation import gettext as _
 
 from ckeditor.fields import RichTextField
 
+
 def _category_image_path(instance, filename):
     return 'categories/{}/{}'.format(instance.name, filename)
+
 
 class Category(models.Model):
     """
@@ -33,8 +35,41 @@ class Category(models.Model):
     def active_items(self):
         return Item.objects.filter(category=self, is_active=True)
 
+    def translate_as(self, lang):
+        """
+        returns translation if available
+        """
+        trans = CategoryTranslation.objects.filter(category=self,
+                                                   lang=lang,
+                                                   is_active=True)
+        if trans: return trans.first()
+        else: return self
+
     def __str__(self):
         return '{}'.format(self.name)
+
+
+class CategoryTranslation(models.Model):
+    """
+    """
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    lang = models.CharField(choices=settings.LANGUAGES, max_length=3)
+    name = models.CharField(max_length=255)
+    description = RichTextField(default='', blank=True, null=True)
+    is_active = models.BooleanField(default=True,
+                                    help_text=_('If active, is visible'))
+
+    @property
+    def slug(self):
+        return self.category.slug
+
+    class Meta:
+        ordering = ['lang']
+        verbose_name = _('Category translation')
+        verbose_name_plural = _('Categories translations')
+
+    def __str__(self):
+        return '{} [{}]'.format(self.category, self.lang)
 
 
 class Item(models.Model):
@@ -86,10 +121,6 @@ class ItemTranslation(models.Model):
     lang = models.CharField(choices=settings.LANGUAGES, max_length=3)
     name = models.CharField(max_length=255)
     description = RichTextField(default='', blank=True, null=True)
-    # img_url = models.ImageField(_('Image'),
-                                # upload_to = _category_image_path,
-                                # blank=True, null=True)
-    # ordering = models.IntegerField(default=0)
     is_active = models.BooleanField(default=True,
                                     help_text=_('If active, is visible'))
 

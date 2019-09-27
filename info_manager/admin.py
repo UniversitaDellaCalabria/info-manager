@@ -37,19 +37,6 @@ class ItemTranslationForm(forms.ModelForm):
 class ItemTranslationInline(admin.StackedInline):
     form  = ItemTranslationForm
     model = ItemTranslation
-    # readonly_fields = ('token', 'create_date', 'sent_date',
-                       # 'sent', 'identity', 'used')
-    # fieldsets = (
-                    # (None, { 'fields' :
-                               # (('identity', 'is_active'),
-                                # ('token', ),
-                                # ('sent', 'sent_date'),
-                                # ('valid_until',),
-                                # ('used',),
-                                # ('create_date',))
-                           # }
-                    # ),
-                # )
     extra = 0
 
 
@@ -65,6 +52,18 @@ class Item(admin.ModelAdmin):
     inlines = [ItemTranslationInline,]
 
 
+class CategoryTranslationForm(forms.ModelForm):
+    class Meta:
+        model = CategoryTranslation
+        fields = ('__all__')
+
+
+class CategoryTranslationInline(admin.StackedInline):
+    form  = CategoryTranslationForm
+    model = CategoryTranslation
+    extra = 0
+
+
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('name',
@@ -74,4 +73,5 @@ class CategoryAdmin(admin.ModelAdmin):
     list_editable = ('is_active','ordering')
     search_fields = ('name',)
     exclude = ('slug',)
-    inlines = [ItemInline,]
+    inlines = [CategoryTranslationInline, #ItemInline,
+              ]
