@@ -10,6 +10,16 @@
 
 {% block page_meta_description %}University of Calabria - SSO services{% endblock %}
 
+{% block extra_head %}
+    {{ block.super }}
+    <style>
+
+        .list-group-item  {
+                    border-top: none;
+            }
+    </style>
+{% endblock %}
+
 {% block header_center_search %}{% endblock header_center_search %}
 {% block header_slim_right_zone %}{% endblock header_slim_right_zone %}
 {% block main_menu %}{% endblock main_menu %}
@@ -27,15 +37,18 @@
                          alt="{{ category.name }}">
                 </p>
                 {% endif %}
+<!--
                 {% if category.description %}
                     <p>{{ category.description|safe }}</p>
                     <hr />
                 {% endif %}
+-->
                 <div class="row">
                     <div class="col-sm">
                         <ul class="list-group list-group-flush" style="padding-left: 0;">
-                        {% for item in category.active_pages %}
+                        {% for item in active_items %}
                             <li class="mt-2 list-group-item">
+                                <!-- lang: {{ item.lang }} -->
                                 <h5>{{ item.name }}</h5>
                                 <br>
                                 <p>{{ item.description|safe }}</p>

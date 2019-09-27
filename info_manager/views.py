@@ -30,7 +30,11 @@ def info_manager_index(request):
 def info_page(request, slug):
     _set_lang(request)
 
+    lang = request.GET.get('lang',
+                           translation.get_language_from_request(request))
     template = "info_page.html"
     category = get_object_or_404(Category, slug=slug)
-    d = {'category': category}
-    return render(request, template, d)
+    data = {'category': category,
+            'active_items': [item.translate_as(lang=lang)
+                             for item in category.active_items()]}
+    return render(request, template, data)

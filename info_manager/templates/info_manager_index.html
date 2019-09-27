@@ -26,7 +26,11 @@ University of Calabria - SSO services
         <div class="card-wrapper card-space">
             <div class="card card-bg no-after">
                 <div class="card-body">
-                    <h4 class="card-title">{{ category.name }}</h4>
+                    <h4 class="card-title">
+                        <a href="{% url 'info_manager:info_page' category.slug %}" style="color: grey; text-decoration: none;">
+                        {{ category.name }}
+                        </a>
+                    </h4>
                     {% if category.img_url %}
                     <p>
                         <img style="max-width: 100%;"
@@ -35,11 +39,33 @@ University of Calabria - SSO services
                              alt="{{ category.name }}">
                     </p>
                     {% endif %}
+
                     {% if category.description %}
                         <p>{{ category.description|safe }}</p>
-                        <a href="{% url 'info_manager:info_page' category.slug %}" class="float-xl-right">{% trans "Leggi" %}</a>
-                        <hr />
                     {% endif %}
+<!--
+                    <h6>{% trans "Active items" %}:</h6>
+-->
+                    <ol>
+                        {% for item in category.active_items %}
+                        <li>
+                            <h6>
+                            {{ item.name }}
+                            {% if item.active_translations %}
+                                {% for item_trans in item.active_translations %}
+                                    &nbsp;[{{ item_trans.lang }}]
+                                {% endfor %}
+                            {% endif %}
+                            </h6>
+
+                            <p>{% trans "published" %}: {{ item.created }} &nbsp; {% trans "modified" %}: {{ item.modified }}</p>
+                        </li>
+                        {% endfor %}
+                    </ol>
+                    <div>
+                    <a href="{% url 'info_manager:info_page' category.slug %}" class="float-xl-right">{% trans "Leggi tutto" %}</a>
+                    </div>
+                    <hr />
 
                 </div>
             </div>
