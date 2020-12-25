@@ -1,6 +1,6 @@
 Info Manager app for Django Framework
 -------------------------------------
-Serve informational pages to users with multi language support.
+Serves informational pages to users with multi language support.
 
 Installation
 ------------
