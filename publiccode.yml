@@ -1,0 +1,101 @@
+# This repository adheres to the publiccode.yml standard by including this 
+# metadata file that makes public software easily discoverable.
+# More info at https://github.com/italia/publiccode.yml
+
+publiccodeYmlVersion: '0.2'
+categories:
+  - content-management
+dependsOn:
+  open:
+    - name: MariaDB
+      optional: false
+      version: ''
+      versionMax: ''
+      versionMin: ''
+    - name: Python
+      optional: false
+      version: ''
+      versionMax: ''
+      versionMin: ''
+    - name: Django
+      optional: false
+      version: ''
+      versionMax: ''
+      versionMin: ''
+description:
+  en:
+    documentation: 'https://github.com/UniversitaDellaCalabria/info-manager/blob/master/README.md'
+    features:
+      - Righ HTML editing with CKEDitor
+      - multi language support
+    genericName: web application
+    longDescription: >
+        Consider the humble information page that doesn't sell, doesn't generate leads, 
+        and doesn't herd prospects to pages that do, a page that simply provides 
+        helpful information on a particular topic. This is `info-manager`.
+        
+        If handled with care, simple information pages can do a lot of heavy lifting for us:
+        
+        - Can be used to handle redirects from http error response (500, 4xx ...)
+        - Manages pcookies and privacy related informations
+        - help support, F.A.Q. pages
+        
+        Most of the time our users are online, they're searching for information, 
+        we know that Web makes gathering that information more efficient is it would be well designed.
+        
+        In short, it pays to make your simple information pages the best they 
+        can be, modular and standalone. So, it's  why we develoepd info-manager.
+    
+    screenshots:
+      - >-
+        https://github.com/UniversitaDellaCalabria/info-manager/raw/master/data/gallery/screenshot_1.png
+    shortDescription: Informational pages CMS with multi language support.
+developmentStatus: stable
+intendedAudience:
+  scope:
+    - employment
+it:
+  conforme:
+    gdpr: true
+    lineeGuidaDesign: false
+    misureMinimeSicurezza: true
+    modelloInteroperabilita: false
+  countryExtensionVersion: '0.2'
+  piattaforme:
+    anpr: false
+    cie: false
+    pagopa: false
+    spid: false
+  riuso:
+    codiceIPA: unical
+landingURL: 'https://github.com/UniversitaDellaCalabria/info-manager'
+legal:
+  authorsFile: >-
+    https://github.com/UniversitaDellaCalabria/info-manager/blob/master/AUTHORS
+  license: Apache-2.0
+  mainCopyrightOwner: Università della Calabria
+localisation:
+  availableLanguages:
+    - it
+    - en
+  localisationReady: true
+maintenance:
+  contacts:
+    - affiliation: unical.it
+      email: giuseppe.demarco@unical.it
+      name: Giuseppe De Marco
+    - affiliation: unical.it
+      email: francesco.filicetti@unical.it
+      name: Francesco Filicetti
+  type: internal
+name: info-manager
+platforms:
+  - linux
+  - web
+releaseDate: '2020-01-13'
+roadmap: 'https://github.com/UniversitaDellaCalabria/info-manager/issues'
+softwareType: standalone/web
+softwareVersion: 1.2.0
+url: 'https://github.com/UniversitaDellaCalabria/info-manager'
+usedBy:
+  - 'https://www.unical.it'
