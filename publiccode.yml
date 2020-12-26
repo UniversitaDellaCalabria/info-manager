@@ -48,7 +48,7 @@ description:
     
     screenshots:
       - >-
-        https://github.com/UniversitaDellaCalabria/info-manager/raw/master/data/gallery/screenshot_1.png
+        https://raw.githubusercontent.com/UniversitaDellaCalabria/info-manager/master/data/gallery/screenshot_1.png
     shortDescription: Informational pages CMS with multi language support.
 developmentStatus: stable
 intendedAudience:
