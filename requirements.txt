@@ -1,2 +1,2 @@
-pillow==9.0.0
+pillow==10.2.0
 django-ckeditor
